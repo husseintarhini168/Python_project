@@ -2,10 +2,12 @@ from PIL import Image
 import math
 
 # Define the hexagon properties
-HEX_SIZE = 20  # Radius of each hexagon
+HEX_SIZE = 10  # Reduced radius for better detail
 
 def average_color(image, x_start, y_start, hex_size):
-    # Calculate the average color of a hexagonal region
+    """
+    Calculate the average color of a hexagonal region.
+    """
     pixels = []
     for x in range(x_start, x_start + hex_size):
         for y in range(y_start, y_start + hex_size):
@@ -23,7 +25,9 @@ def average_color(image, x_start, y_start, hex_size):
     return (r_avg, g_avg, b_avg)
 
 def hex_to_svg(x, y, size, color):
-    # Convert hex coordinates to SVG path for a regular hexagon
+    """
+    Convert hex coordinates to SVG path for a regular hexagon.
+    """
     angle_deg = 60
     angle_rad = math.pi / 180 * angle_deg
     points = [
@@ -37,23 +41,26 @@ def hex_to_svg(x, y, size, color):
     return f'<polygon points="{points_str}" fill="{hex_color}" stroke="none" />\n'
 
 def generate_svg(image, hex_size, width, height):
+    """
+    Generate the SVG content by sampling hexagons from the image.
+    """
     svg_content = f'<svg width="{width}" height="{height}" xmlns="http://www.w3.org/2000/svg">\n'
     
     # Define hexagonal grid steps
-    x_offset = hex_size * 3/2
+    x_offset = hex_size * 1.5
     y_offset = math.sqrt(3) * hex_size
     
     # Loop through the image using the hex grid
     for y in range(0, image.height, int(y_offset)):
         for x in range(0, image.width, int(x_offset)):
-            # Alternate rows for a proper hexagonal grid effect
-            if (y // int(y_offset)) % 2 == 0:
-                x_shift = 0
+            # Shift alternate rows to form the hexagon grid
+            if (y // int(y_offset)) % 2 == 1:
+                x_shift = hex_size * 0.75  # Shift for alternate rows
             else:
-                x_shift = int(hex_size * 3/4)  # Shift by half hex width for alternating rows
+                x_shift = 0
 
             # Sample the average color for the hexagon
-            avg_color = average_color(image, x + x_shift, y, hex_size)
+            avg_color = average_color(image, int(x + x_shift), y, hex_size)
             # Create the hexagon in SVG
             svg_content += hex_to_svg(x + x_shift, y, hex_size, avg_color)
     
@@ -62,7 +69,7 @@ def generate_svg(image, hex_size, width, height):
 
 def main():
     INPUT_FILENAME = 'screenshot.png'
-    OUTPUT_FILENAME = 'output.svg'
+    OUTPUT_FILENAME = 'final_output.svg'
     
     # Load the image
     image = Image.open(INPUT_FILENAME)
@@ -79,6 +86,6 @@ def main():
 
     return OUTPUT_FILENAME
 
-# Run the main function to generate the updated SVG
-output_svg_path = main()
-output_svg_path
+# Run the main function to generate the final SVG
+if __name__ == "__main__":
+    main()
