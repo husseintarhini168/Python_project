@@ -1,7 +1,8 @@
 [tool.poetry]
 name = "checkio1"
 version = "0.1.0"
-description = ""
+description = "This project to convert a bluerred image with low 
+resolution to a high resolution image to use it as a wallpaper to my project"
 authors = ["Hussein Tarhini <husseintarhini168@gmail.com>"]
 readme = "README.md"
 
