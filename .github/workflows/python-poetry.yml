@@ -4,10 +4,10 @@ name: Python Poetry CI
 on:
   push:
     branches:
-      - main  # Run on push to the main branch
+      - master  # Run on push to the main branch
   pull_request:
     branches:
-      - main  # Run on pull requests to the main branch
+      - master  # Run on pull requests to the main branch
 
 # The jobs to run on the workflow
 jobs:
