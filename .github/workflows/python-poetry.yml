@@ -1,0 +1,49 @@
+name: Python Poetry CI
+
+# Controls when the workflow will run
+on:
+  push:
+    branches:
+      - main  # Run on push to the main branch
+  pull_request:
+    branches:
+      - main  # Run on pull requests to the main branch
+
+# The jobs to run on the workflow
+jobs:
+  test:
+
+    # The type of runner to use (GitHub-provided virtual environment)
+    runs-on: ubuntu-latest
+
+    # Define the steps of the job
+    steps:
+    # Step 1: Check out the code from the repository
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Step 2: Set up Python 3.x (you can adjust the version if needed)
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+
+    # Step 3: Install Poetry
+    - name: Install Poetry
+      run: curl -sSL https://install.python-poetry.org | python3 -
+
+    # Step 4: Configure Poetry to install dependencies in the virtual environment
+    - name: Configure Poetry
+      run: poetry config virtualenvs.in-project true
+
+    # Step 5: Install dependencies using Poetry
+    - name: Install dependencies
+      run: poetry install
+
+    # Step 6: Run tests using Poetry
+    - name: Run tests with Pytest
+      run: poetry run pytest
+
+    # Optional: Run linting (e.g., using flake8)
+    - name: Run linting
+      run: poetry run flake8 .
