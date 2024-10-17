@@ -1,14 +1,12 @@
 [tool.poetry]
 name = "checkio1"
 version = "0.1.0"
-description = "This project to convert a bluerred image with low 
-resolution to a high resolution image to use it as a wallpaper to my project"
+description = "This project converts a blurred image with low resolution to a high-resolution image to use as a wallpaper for my project."
 authors = ["Hussein Tarhini <husseintarhini168@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
-
 
 [build-system]
 requires = ["poetry-core"]
