@@ -1,22 +1,23 @@
 from PIL import Image
 import math
 
-# Define the hexagon properties
-HEX_SIZE = 10  # Reduced radius for better detail
+# Define hexagon properties
+HEX_SIZE = 15  # Hexagon size
 
-def average_color(image, x_start, y_start, hex_size):
-    """
-    Calculate the average color of a hexagonal region.
-    """
+# Load the image
+input_filename = 'screenshot.png'  # Change this to your input file
+image = Image.open(input_filename)
+
+def average_color(image, x_start, y_start, x_end, y_end):
+    """Calculate the average color of a region."""
     pixels = []
-    for x in range(x_start, x_start + hex_size):
-        for y in range(y_start, y_start + hex_size):
+    for x in range(x_start, x_end):
+        for y in range(y_start, y_end):
             if x < image.width and y < image.height:
                 pixels.append(image.getpixel((x, y)))
     
-    # Calculate the average color
     if not pixels:
-        return (255, 255, 255)  # Default white if no pixels are found
+        return (255, 255, 255)  # Default to white if no pixels
     
     r_avg = sum([p[0] for p in pixels]) // len(pixels)
     g_avg = sum([p[1] for p in pixels]) // len(pixels)
@@ -24,68 +25,65 @@ def average_color(image, x_start, y_start, hex_size):
     
     return (r_avg, g_avg, b_avg)
 
-def hex_to_svg(x, y, size, color):
+def hexagon_to_svg(x, y, size, color):
     """
-    Convert hex coordinates to SVG path for a regular hexagon.
+    Create a flat-topped SVG hexagon with no stroke (outline).
     """
-    angle_deg = 60
-    angle_rad = math.pi / 180 * angle_deg
-    points = [
-        (x + size * math.cos(angle_rad * i), y + size * math.sin(angle_rad * i)) 
-        for i in range(6)
-    ]
-    
+    points = []
+    for i in range(6):
+        angle_deg = 60 * i  # Adjust for flat-topped hexagons
+        angle_rad = math.radians(angle_deg)
+        points.append((x + size * math.cos(angle_rad), y + size * math.sin(angle_rad)))
+
     points_str = ' '.join([f'{p[0]},{p[1]}' for p in points])
     hex_color = f'rgb({color[0]},{color[1]},{color[2]})'
     
-    return f'<polygon points="{points_str}" fill="{hex_color}" stroke="none" />\n'
+    return f'<polygon points="{points_str}" fill="{hex_color}" stroke="none" stroke-width="0" />\n'
 
-def generate_svg(image, hex_size, width, height):
+def generate_svg_aligned(image, hex_size, width, height):
     """
-    Generate the SVG content by sampling hexagons from the image.
+    Generate SVG with hexagons aligned to match the pattern in the input image.
     """
     svg_content = f'<svg width="{width}" height="{height}" xmlns="http://www.w3.org/2000/svg">\n'
     
-    # Define hexagonal grid steps
-    x_offset = hex_size * 1.5
-    y_offset = math.sqrt(3) * hex_size
-    
-    # Loop through the image using the hex grid
+    # Adjust the grid steps for precise alignment
+    x_offset = hex_size * 1.5  # Horizontal step between hexagons
+    y_offset = math.sqrt(3) * hex_size  # Vertical step between hexagons
+
+    # Loop through the image with the adjusted hex grid
     for y in range(0, image.height, int(y_offset)):
         for x in range(0, image.width, int(x_offset)):
-            # Shift alternate rows to form the hexagon grid
-            if (y // int(y_offset)) % 2 == 1:
-                x_shift = hex_size * 0.75  # Shift for alternate rows
+            # Adjust row shifts to create proper hexagonal alignment
+            if (x // int(x_offset)) % 2 == 1:
+                x_shift = hex_size * 0.75  # Shift alternate rows
             else:
                 x_shift = 0
 
-            # Sample the average color for the hexagon
-            avg_color = average_color(image, int(x + x_shift), y, hex_size)
+            x_hex_start = x 
+            y_hex_start = y + x_shift
+
+            # Sample the color for this hexagon
+            avg_color = average_color(image, int(x_hex_start), int(y_hex_start),
+                                      int(x_hex_start + hex_size), int(y_hex_start + hex_size))
+            
             # Create the hexagon in SVG
-            svg_content += hex_to_svg(x + x_shift, y, hex_size, avg_color)
+            svg_content += hexagon_to_svg(x_hex_start, y_hex_start, hex_size, avg_color)
     
     svg_content += '</svg>'
     return svg_content
 
-def main():
-    INPUT_FILENAME = 'screenshot.png'
-    OUTPUT_FILENAME = 'final_output.svg'
-    
-    # Load the image
-    image = Image.open(INPUT_FILENAME)
-    
-    # Get the dimensions of the image
-    width, height = image.width, image.height
-    
-    # Generate SVG content
-    svg_content = generate_svg(image, HEX_SIZE, width, height)
-    
-    # Write to the output SVG file
-    with open(OUTPUT_FILENAME, 'w') as f:
-        f.write(svg_content)
+# Get dimensions of the image
+width, height = image.width, image.height
 
-    return OUTPUT_FILENAME
+# Generate SVG content with the adjusted hexagon alignment
+svg_content_aligned = generate_svg_aligned(image, HEX_SIZE, width, height)
 
-# Run the main function to generate the final SVG
-if __name__ == "__main__":
-    main()
+# Define output file path
+output_filename = 'aligned_output.svg'  # Change to your output filename
+
+# Write the aligned SVG content to the output file
+with open(output_filename, 'w') as f:
+    f.write(svg_content_aligned)
+
+# Print output file path for confirmation
+print(f"SVG saved to {output_filename}")
