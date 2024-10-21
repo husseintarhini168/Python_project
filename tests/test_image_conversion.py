@@ -1,3 +1,7 @@
+"""
+This module contains tests for image conversion functions using PIL and SVG generation.
+"""
+
 import pytest
 from PIL import Image
 from checkio1.image_conversion import (
@@ -9,9 +13,6 @@ from checkio1.image_conversion import (
     generate_svg_aligned
 )
 
-"""
-This module contains tests for image conversion functions using PIL and SVG generation.
-"""
 
 @pytest.fixture
 def sample_image():
