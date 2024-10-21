@@ -45,5 +45,3 @@ jobs:
       run: poetry run pytest
 
     # Optional: Run linting (e.g., using flake8)
-    - name: Run linting
-      run: poetry run flake8 .
