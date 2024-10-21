@@ -14,7 +14,7 @@ from checkio1.image_conversion import (
 )
 
 @pytest.fixture
-def image_sample():
+def image_sample_fixture():
     """Create a red sample image for testing."""
     return Image.new('RGB', (100, 100), (255, 0, 0))
 
@@ -25,14 +25,14 @@ def test_load_image():
     assert isinstance(image, Image.Image), "Expected a PIL Image object"
 
 # Test Average Color
-def test_average_color(image_sample):
+def test_average_color(image_sample_fixture):
     """Test that the average color function returns the correct color."""
-    color = average_color(image_sample, 0, 0, 10, 10)
+    color = average_color(image_sample_fixture, 0, 0, 10, 10)
     assert color == (255, 0, 0), "Expected red color (255, 0, 0) in the selected region"
 
-def test_average_color_empty_region(image_sample):
+def test_average_color_empty_region(image_sample_fixture):
     """Test that out-of-bounds regions return a default white color."""
-    color = average_color(image_sample, 110, 110, 120, 120)
+    color = average_color(image_sample_fixture, 110, 110, 120, 120)
     assert color == (255, 255, 255), "Expected default white color for out-of-bounds region"
 
 # Test Create Hexagon Points
@@ -50,16 +50,16 @@ def test_hexagon_to_svg():
     assert '<polygon' in svg_hex, "Expected the SVG element to be a polygon"
 
 # Test Generate SVG Hexagon
-def test_generate_svg_hexagon(image_sample):
+def test_generate_svg_hexagon(image_sample_fixture):
     """Test that SVG hexagon is generated with red fill color from the sample image."""
-    svg_hex = generate_svg_hexagon(image_sample, 50, 50, 15)
+    svg_hex = generate_svg_hexagon(image_sample_fixture, 50, 50, 15)
     assert 'rgb(255,0,0)' in svg_hex
     "SVG hexagon to have red fill color from the sample image"
 
 # Test Generate SVG Aligned Hexagons
-def test_generate_svg_aligned(image_sample):
+def test_generate_svg_aligned(image_sample_fixture):
     """Test that SVG content is generated correctly with aligned hexagons."""
-    width, height = image_sample.width, image_sample.height
-    svg_content = generate_svg_aligned(image_sample, 15, width, height)
+    width, height = image_sample_fixture.width, image_sample_fixture.height
+    svg_content = generate_svg_aligned(image_sample_fixture, 15, width, height)
     assert svg_content.startswith('<svg'), "SVG content should start with an <svg> tag"
     assert svg_content.endswith('</svg>'), "SVG content should end with a closing </svg> tag"
