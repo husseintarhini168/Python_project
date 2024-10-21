@@ -1,5 +1,3 @@
-
-
 import pytest
 from PIL import Image
 from checkio1.image_conversion import (
