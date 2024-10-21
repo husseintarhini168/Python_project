@@ -16,3 +16,13 @@ flake8 = "^7.1.1"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.flake8]
+max-line-length = 100  # To increase the default line length limit from 79 to 100
+ignore = ["E501", "W291", "W293"]  # Example of ignoring specific rules
+exclude = [
+    ".venv",  # Exclude virtual environment folder
+    "__pycache__",  # Exclude bytecode cache
+    "site-packages"  # Exclude any package folders
+]
+
