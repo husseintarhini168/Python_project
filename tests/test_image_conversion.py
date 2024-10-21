@@ -53,7 +53,8 @@ def test_hexagon_to_svg():
 def test_generate_svg_hexagon(sample_image):
     """Test that SVG hexagon is generated with red fill color from the sample image."""
     svg_hex = generate_svg_hexagon(sample_image, 50, 50, 15)
-    assert 'rgb(255,0,0)' in svg_hex, "Expected the SVG hexagon to have red fill color from the sample image"
+    assert 'rgb(255,0,0)' in svg_hex
+    "SVG hexagon to have red fill color from the sample image"
 
 # Test Generate SVG Aligned Hexagons
 def test_generate_svg_aligned(sample_image):
