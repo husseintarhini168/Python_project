@@ -1,6 +1,4 @@
-"""
-This module contains tests for image conversion functions using PIL and SVG generation.
-"""
+
 
 import pytest
 from PIL import Image
@@ -52,16 +50,16 @@ def test_hexagon_to_svg():
     assert '<polygon' in svg_hex, "Expected the SVG element to be a polygon"
 
 # Test Generate SVG Hexagon
-def test_generate_svg_hexagon(image_sample):
+def test_generate_svg_hexagon(sample_image):
     """Test that SVG hexagon is generated with red fill color from the sample image."""
-    svg_hex = generate_svg_hexagon(image_sample, 50, 50, 15)
+    svg_hex = generate_svg_hexagon(sample_image, 50, 50, 15)
     assert 'rgb(255,0,0)' in svg_hex, "Expected the SVG hexagon to have red fill color from the sample image"
 
 # Test Generate SVG Aligned Hexagons
-def test_generate_svg_aligned(image_sample):
+def test_generate_svg_aligned(sample_image):
     """Test that SVG content is generated correctly with aligned hexagons."""
-    width, height = image_sample.width, image_sample.height
-    svg_content = generate_svg_aligned(image_sample, 15, width, height)
+    width, height = sample_image.width, sample_image.height
+    svg_content = generate_svg_aligned(sample_image, 15, width, height)
     assert svg_content.startswith('<svg'), "SVG content should start with an <svg> tag"
     assert svg_content.endswith('</svg>\n') or \
         svg_content.endswith('</svg>'), \
