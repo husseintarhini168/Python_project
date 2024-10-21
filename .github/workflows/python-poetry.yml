@@ -44,4 +44,8 @@ jobs:
     - name: Run tests with Pytest
       run: poetry run pytest
 
-    # Optional: Run linting (e.g., using flake8)
+    # Step 7: Run pylint on the entire project
+    - name: Run pylint
+      run: poetry run pylint .
+
+    
