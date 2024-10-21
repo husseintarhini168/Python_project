@@ -62,6 +62,6 @@ def test_generate_svg_aligned(sample_img):
     width, height = sample_img.width, sample_img.height
     svg_content = generate_svg_aligned(sample_img, 15, width, height)
     assert svg_content.startswith('<svg'), "SVG content should start with an <svg> tag"
-    assert svg_content.endswith('</svg>\n') or \
-        svg_content.endswith('</svg>'), \
-        "SVG content should end with a closing </svg> tag"
+    assert (
+        svg_content.endswith('</svg>\n') or svg_content.endswith('</svg>')
+    ), "SVG content should end with a closing </svg> tag"
