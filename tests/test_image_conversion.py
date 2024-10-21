@@ -33,8 +33,7 @@ def test_average_color(sample_img):
 def test_average_color_empty_region(sample_img):
     """Test that out-of-bounds regions return a default white color."""
     color = average_color(sample_img, 110, 110, 120, 120)
-    assert color == (255, 255, 255), \
-        "Expected default white color for out-of-bounds region"
+    assert color == (255, 255, 255), "Expected default white color for out-of-bounds region"
 
 # Test Create Hexagon Points
 def test_create_hexagon_points():
@@ -62,6 +61,4 @@ def test_generate_svg_aligned(sample_img):
     width, height = sample_img.width, sample_img.height
     svg_content = generate_svg_aligned(sample_img, 15, width, height)
     assert svg_content.startswith('<svg'), "SVG content should start with an <svg> tag"
-    assert (
-        svg_content.endswith('</svg>\n') or svg_content.endswith('</svg>')
-    ), "SVG content should end with a closing </svg> tag"
+    assert svg_content.endswith('</svg>'), "SVG content should end with a closing </svg> tag"
