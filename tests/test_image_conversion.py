@@ -15,7 +15,7 @@ from checkio1.image_conversion import (
 
 
 @pytest.fixture
-def image_sample_fixture():
+def image_sample():
     """Create a red sample image for testing."""
     return Image.new('RGB', (100, 100), (255, 0, 0))
 
