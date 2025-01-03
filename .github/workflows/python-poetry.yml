@@ -46,6 +46,6 @@ jobs:
 
     # Step 7: Run pylint on the entire project
     - name: Run pylint
-      
+      run: poetry run 
 
     
