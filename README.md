@@ -17,25 +17,25 @@ Follow these steps to use and validate the project:
 
 2.Install Dependencies
 Install required dependencies using poetry:
-poetry install
+```bash poetry install
 
 3.Ensure your input PNG file (screenshot.png) is placed in the project directory.
 
 4.Run the Python Script
 Process the input image and generate the SVG file:
-python -m checkio1.image_conversion
+```bash python -m checkio1.image_conversion
 
 5.Run Tests
 Validate the project functionality using pytest:
-poetry run pytest
+```bash poetry run pytest
 
 6.Check Code Quality
 Run pylint to analyze the code and improve its quality:
-poetry run pylint checkio1/
+```bash poetry run pylint checkio1/
 
 7.Generate Documentation
 Generate project documentation using Sphinx:
-sphinx-apidoc -o docs/source/ checkio1
+```bash sphinx-apidoc -o docs/source/ checkio1
 cd docs
 make html
 
