@@ -28,15 +28,15 @@ def test_load_image():
 
 
 # Test Average Color
-def test_average_color(red_sample_image):
+def test_average_color(sample_image_fixture):
     """Test that the average color function returns the correct color."""
-    color = average_color(red_sample_image, 0, 0, 10, 10)
+    color = average_color(sample_image_fixture, 0, 0, 10, 10)
     assert color == (255, 0, 0), "Expected red color (255, 0, 0) in the selected region"
 
 
-def test_average_color_empty_region(red_sample_image):
+def test_average_color_empty_region(sample_image_fixture):
     """Test that out-of-bounds regions return a default white color."""
-    color = average_color(red_sample_image, 110, 110, 120, 120)
+    color = average_color(sample_image_fixture, 110, 110, 120, 120)
     assert color == (255, 255, 255), "Expected default white color for out-of-bounds region"
 
 
@@ -57,16 +57,16 @@ def test_hexagon_to_svg():
 
 
 # Test Generate SVG Hexagon
-def test_generate_svg_hexagon(red_sample_image):
+def test_generate_svg_hexagon(sample_image_fixture):
     """Test that SVG hexagon is generated with red fill color from the sample image."""
-    svg_hex = generate_svg_hexagon(red_sample_image, 50, 50, 15)
+    svg_hex = generate_svg_hexagon(sample_image_fixture, 50, 50, 15)
     assert 'rgb(255,0,0)' in svg_hex, "SVG hexagon should have red fill color from the sample image"
 
 
 # Test Generate SVG Aligned Hexagons
-def test_generate_svg_aligned(red_sample_image):
+def test_generate_svg_aligned(sample_image_fixture):
     """Test that SVG content is generated correctly with aligned hexagons."""
-    width, height = red_sample_image.width, red_sample_image.height
-    svg_content = generate_svg_aligned(red_sample_image, 15, width, height)
+    width, height = sample_image_fixture.width, sample_image_fixture.height
+    svg_content = generate_svg_aligned(sample_image_fixture, 15, width, height)
     assert svg_content.startswith('<svg'), "SVG content should start with an <svg> tag"
     assert svg_content.endswith('</svg>'), "SVG content should end with a closing </svg> tag"
