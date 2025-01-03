@@ -7,7 +7,35 @@ This project is a Python application that processes a low-resolution PNG image a
 ## **Quick Start**
 
 ### **How to Use the Project**
-1. Place your PNG file (`screenshot.png`) in the project directory.
-2. Run the Python script:
+Follow these steps to use and validate the project:
+
+1. **Clone the Repository**  
+   Clone the project to your local machine:
    ```bash
-   python -m checkio1.image_conversion
+   git clone <repository_url>
+   cd <repository_directory>
+
+2.Install Dependencies
+Install required dependencies using poetry:
+poetry install
+
+3.Ensure your input PNG file (screenshot.png) is placed in the project directory.
+
+4.Run the Python Script
+Process the input image and generate the SVG file:
+python -m checkio1.image_conversion
+
+5.Run Tests
+Validate the project functionality using pytest:
+poetry run pytest
+
+6.Check Code Quality
+Run pylint to analyze the code and improve its quality:
+poetry run pylint checkio1/
+
+7.Generate Documentation
+Generate project documentation using Sphinx:
+sphinx-apidoc -o docs/source/ checkio1
+cd docs
+make html
+
