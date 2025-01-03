@@ -39,3 +39,13 @@
     cd docs
     make html
 
+#example
+**Input Image**  
+This is the low-resolution input PNG file:  
+![Input Image](screenshot.png)
+
+**Output Image**  
+This is the generated high-resolution SVG file:  
+![Output Image](output.svg)
+
+
