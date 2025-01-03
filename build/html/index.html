@@ -53,13 +53,72 @@
 </section>
 <section id="quick-start">
 <h2>Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading">¶</a></h2>
-<p>Run the following commands to process an image:</p>
-<p><a href="#id1"><span class="problematic" id="id2">``</span></a><a href="#id3"><span class="problematic" id="id4">`</span></a>python
-from checkio1.image_conversion import load_image, generate_svg_aligned, save_svg_to_file</p>
-<p>image = load_image('screenshot.png')
-svg_content = generate_svg_aligned(image, hex_size=15, width=image.width, height=image.height)
-save_svg_to_file(svg_content, 'output.svg')</p>
+<p>This section provides a quick guide on how to set up and run the project.</p>
+<p><strong>Prerequisites</strong>
+- Python 3.8 or later
+- Pip (Python package manager)
+- Poetry (optional, for dependency management)</p>
+<p><strong>Installation</strong>
+Clone the repository and install the dependencies:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/husseintarhini168/python_project.git
+<span class="nb">cd</span><span class="w"> </span>your-repo-name
+poetry<span class="w"> </span>install
+</pre></div>
+</div>
+<p><strong>Running the Project</strong>
+To process the image and generate the SVG file:</p>
+<ol class="arabic">
+<li><p>Place your PNG file (e.g., <cite>screenshot.png</cite>) in the project directory.</p></li>
+<li><p>Run the script:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>checkio1.image_conversion
+</pre></div>
+</div>
+</li>
+<li><p>The generated SVG file (<cite>output.svg</cite>) will appear in the project directory.</p></li>
+</ol>
+<p><strong>Programmatic Usage</strong>
+You can also use the project as a library:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">checkio1.image_conversion</span> <span class="kn">import</span> <span class="n">load_image</span><span class="p">,</span> <span class="n">generate_svg_aligned</span><span class="p">,</span> <span class="n">save_svg_to_file</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">load_image</span><span class="p">(</span><span class="s1">&#39;screenshot.png&#39;</span><span class="p">)</span>
+<span class="n">svg_content</span> <span class="o">=</span> <span class="n">generate_svg_aligned</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">hex_size</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">image</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">image</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
+<span class="n">save_svg_to_file</span><span class="p">(</span><span class="n">svg_content</span><span class="p">,</span> <span class="s1">&#39;output.svg&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
 </section>
+<section id="project-structure">
+<h2>Project Structure<a class="headerlink" href="#project-structure" title="Link to this heading">¶</a></h2>
+<p>Here is an overview of the project directory structure:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>checkio1/
+├── checkio1/                  # Main package directory
+│   ├── __init__.py            # Initializes the package
+│   ├── image_conversion.py    # Core functionality for image processing
+├── docs/                      # Documentation generated with Sphinx
+│   ├── source/                # Sphinx source files
+│   ├── build/                 # Generated HTML documentation
+├── tests/                     # Unit tests for the project
+│   ├── test_image_conversion.py # Tests for image processing functions
+├── screenshot.png             # Sample input image
+├── output.svg                 # Generated output file
+├── pyproject.toml             # Poetry configuration file
+├── README.md                  # Project overview and instructions
+├── Makefile                   # Build commands for Sphinx documentation
+</pre></div>
+</div>
+</section>
+</section>
+<section id="contents">
+<h1>Contents<a class="headerlink" href="#contents" title="Link to this heading">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
 </section>
 
 
